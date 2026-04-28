@@ -6,19 +6,59 @@ document.addEventListener('DOMContentLoaded', function() {
     if (menuToggle && navLinks) {
         menuToggle.addEventListener('click', function() {
             navLinks.classList.toggle('active');
+            menuToggle.classList.toggle('active');
             
-            // Animation du menu burger
-            const spans = menuToggle.querySelectorAll('span');
-            spans.forEach((span, index) => {
+            // Empêcher le scroll du body quand le menu est ouvert (mobile)
+            if (window.innerWidth <= 768) {
                 if (navLinks.classList.contains('active')) {
-                    if (index === 0) span.style.transform = 'rotate(45deg) translateY(8px)';
-                    if (index === 1) span.style.opacity = '0';
-                    if (index === 2) span.style.transform = 'rotate(-45deg) translateY(-8px)';
+                    document.body.style.overflow = 'hidden';
+                    document.body.style.position = 'fixed';
+                    document.body.style.width = '100%';
                 } else {
-                    span.style.transform = '';
-                    span.style.opacity = '';
+                    document.body.style.overflow = '';
+                    document.body.style.position = '';
+                    document.body.style.width = '';
+                }
+            }
+        });
+        
+        // Fermer le menu quand on clique sur un lien (mobile)
+        const navItems = navLinks.querySelectorAll('a');
+        navItems.forEach(item => {
+            item.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    navLinks.classList.remove('active');
+                    menuToggle.classList.remove('active');
+                    document.body.style.overflow = '';
+                    document.body.style.position = '';
+                    document.body.style.width = '';
                 }
             });
+        });
+        
+        // Fermer le menu quand on clique sur l'overlay (mobile)
+        document.addEventListener('click', function(e) {
+            if (window.innerWidth <= 768 && 
+                navLinks.classList.contains('active') && 
+                !menuToggle.contains(e.target) && 
+                !navLinks.contains(e.target)) {
+                navLinks.classList.remove('active');
+                menuToggle.classList.remove('active');
+                document.body.style.overflow = '';
+                document.body.style.position = '';
+                document.body.style.width = '';
+            }
+        });
+        
+        // Fermer le menu avec la touche Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && window.innerWidth <= 768 && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                menuToggle.classList.remove('active');
+                document.body.style.overflow = '';
+                document.body.style.position = '';
+                document.body.style.width = '';
+            }
         });
     }
 
@@ -253,6 +293,39 @@ document.addEventListener('DOMContentLoaded', function() {
             this.style.outline = '';
             this.style.outlineOffset = '';
         });
+    });
+    
+    // Optimisations tactiles pour mobile
+    if ('ontouchstart' in window) {
+        document.body.classList.add('touch-device');
+        
+        // Améliorer l'espacement pour les doigts sur mobile
+        const buttons = document.querySelectorAll('.btn, .service-card, .advantage-card');
+        buttons.forEach(button => {
+            button.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.98)';
+            });
+            
+            button.addEventListener('touchend', function() {
+                this.style.transform = '';
+            });
+        });
+    }
+    
+    // Gérer le redimensionnement de la fenêtre
+    let resizeTimer;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function() {
+            // Fermer le menu mobile si on passe en mode desktop
+            if (window.innerWidth > 768 && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                menuToggle.classList.remove('active');
+                document.body.style.overflow = '';
+                document.body.style.position = '';
+                document.body.style.width = '';
+            }
+        }, 250);
     });
 
     // Précharger les images pour une meilleure performance
