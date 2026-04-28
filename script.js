@@ -343,41 +343,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     images.forEach(img => imageObserver.observe(img));
 
-    // Gestion du thème (clair/sombre) - fonctionnalité bonus
-    const themeToggle = document.createElement('button');
-    themeToggle.innerHTML = '🌙';
-    themeToggle.style.cssText = `
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        border: none;
-        background: #2563eb;
-        color: white;
-        font-size: 20px;
-        cursor: pointer;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        transition: all 0.3s;
-        z-index: 1000;
-    `;
     
-    themeToggle.addEventListener('click', function() {
-        document.body.classList.toggle('dark-theme');
-        this.innerHTML = document.body.classList.contains('dark-theme') ? '☀️' : '🌙';
-    });
-    
-    themeToggle.addEventListener('mouseenter', function() {
-        this.style.transform = 'scale(1.1)';
-    });
-    
-    themeToggle.addEventListener('mouseleave', function() {
-        this.style.transform = 'scale(1)';
-    });
-    
-    document.body.appendChild(themeToggle);
-
     // Performance monitoring
     window.addEventListener('load', function() {
         const loadTime = performance.now();
