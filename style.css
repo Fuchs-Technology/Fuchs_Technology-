@@ -57,6 +57,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
     padding: 1rem 2rem;
     max-width: 1200px;
     margin: 0 auto;
@@ -69,8 +70,8 @@ body {
 }
 
 .logo-img {
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -83,7 +84,7 @@ body {
 
 .logo h2 {
     color: var(--bleu-fonce);
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: bold;
 }
 
@@ -108,14 +109,29 @@ body {
     display: none;
     flex-direction: column;
     cursor: pointer;
+    gap: 4px;
+    width: 35px;
+    height: 35px;
+    justify-content: center;
+    align-items: center;
+    background: rgba(37, 99, 235, 0.1);
+    border: 2px solid var(--orange);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    z-index: 1001;
+}
+
+.menu-toggle:hover {
+    background: rgba(37, 99, 235, 0.2);
+    transform: scale(1.05);
 }
 
 .menu-toggle span {
-    width: 25px;
+    width: 20px;
     height: 3px;
-    background: #333;
-    margin: 3px 0;
-    transition: 0.3s;
+    background: var(--orange);
+    transition: all 0.3s ease;
+    border-radius: 2px;
 }
 
 /* Hero Section */
@@ -1417,16 +1433,18 @@ body {
     
     .menu-toggle {
         display: flex;
-        z-index: 1001;
-        width: 24px;
-        height: 20px;
-        position: relative;
+        flex-direction: column;
         cursor: pointer;
-        transition: all 0.3s ease;
-        padding: 12px;
-        box-sizing: content-box;
-        align-items: center;
+        gap: 4px;
+        width: 35px;
+        height: 35px;
         justify-content: center;
+        align-items: center;
+        background: rgba(37, 99, 235, 0.1);
+        border: 2px solid var(--orange);
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        z-index: 1001;
     }
     
     .menu-toggle:hover {
@@ -1434,29 +1452,14 @@ body {
     }
     
     .menu-toggle span {
-        display: block;
-        width: 24px;
+        width: 20px;
         height: 3px;
-        background: var(--bleu-fonce);
-        border-radius: 1.5px;
-        position: absolute;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        transform-origin: center;
-        left: 0;
+        background: var(--orange);
+        transition: all 0.3s ease;
+        border-radius: 2px;
     }
     
-    .menu-toggle span:nth-child(1) {
-        top: 0;
-    }
-    
-    .menu-toggle span:nth-child(2) {
-        top: 8.5px;
-    }
-    
-    .menu-toggle span:nth-child(3) {
-        top: 17px;
-    }
-    
+        
     /* Animation hamburger en X */
     .menu-toggle.active span:nth-child(1) {
         top: 50%;
