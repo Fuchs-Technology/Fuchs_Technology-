@@ -10,6 +10,7 @@ html {
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 body {
@@ -35,6 +36,8 @@ body {
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    max-width: 100vw;
 }
 
 .container {
@@ -828,19 +831,21 @@ body {
 
 .resources-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
     margin-bottom: 3rem;
 }
 
 .resource-card {
     background: var(--blanc);
-    padding: 2rem;
-    border-radius: 16px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    padding: 1.2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
     border: 2px solid transparent;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
+    text-align: center;
     position: relative;
+    overflow: hidden;
 }
 
 .resource-card:hover {
@@ -1063,14 +1068,18 @@ body {
 .contact {
     padding: 80px 0;
     background: var(--blanc);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .contact-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 0 auto;
+    transform: translateX(20px);
 }
 
 .contact-info h3 {
@@ -1370,13 +1379,18 @@ body {
         margin: 0;
         opacity: 0;
         transform: translateX(20px);
-        animation: slideInRight 0.4s ease forwards;
+        transition: all 0.3s ease;
     }
     
-    .nav-links.active li:nth-child(1) { animation-delay: 0.1s; }
-    .nav-links.active li:nth-child(2) { animation-delay: 0.15s; }
-    .nav-links.active li:nth-child(3) { animation-delay: 0.2s; }
-    .nav-links.active li:nth-child(4) { animation-delay: 0.25s; }
+    .nav-links.active li {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    
+    .nav-links.active li:nth-child(1) { transition-delay: 0.1s; }
+    .nav-links.active li:nth-child(2) { transition-delay: 0.15s; }
+    .nav-links.active li:nth-child(3) { transition-delay: 0.2s; }
+    .nav-links.active li:nth-child(4) { transition-delay: 0.25s; }
     
     .nav-links a {
         padding: 1.25rem 1.5rem;
@@ -1446,6 +1460,11 @@ body {
         transition: all 0.3s ease;
         z-index: 1001;
     }
+
+    .menu-toggle.active {
+        background: rgba(255, 107, 53, 0.3);
+        border-color: var(--blanc);
+    }
     
     .menu-toggle:hover {
         transform: scale(1.05);
@@ -1462,20 +1481,18 @@ body {
         
     /* Animation hamburger en X */
     .menu-toggle.active span:nth-child(1) {
-        top: 50%;
-        transform: translateY(-50%) rotate(45deg);
-        background: var(--orange);
+        transform: rotate(45deg) translate(6px, 6px);
+        background: var(--blanc);
     }
     
     .menu-toggle.active span:nth-child(2) {
         opacity: 0;
-        transform: translateY(-50%) scale(0);
+        transform: scale(0);
     }
     
     .menu-toggle.active span:nth-child(3) {
-        bottom: 50%;
-        transform: translateY(50%) rotate(-45deg);
-        background: var(--orange);
+        transform: rotate(-45deg) translate(6px, -6px);
+        background: var(--blanc);
     }
     
     .logo h2 {
@@ -1504,8 +1521,8 @@ body {
     }
     
     .hero-stats {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0.75rem;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.5rem;
         margin-bottom: 2rem;
         max-width: 100%;
     }
@@ -1590,8 +1607,8 @@ body {
     }
     
     .services-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
     }
     
     .service-card {
@@ -1670,8 +1687,8 @@ body {
     }
     
     .company-stats {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.5rem;
     }
     
     .values {
@@ -1775,7 +1792,7 @@ body {
     
     .resources-grid {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        gap: 2rem;
     }
     
     .resource-card {
@@ -1803,6 +1820,7 @@ body {
         gap: 2rem;
         max-width: 100%;
         padding: 0 15px;
+        transform: translateX(10px);
     }
     
     .contact-info h3 {
@@ -1811,7 +1829,8 @@ body {
     }
     
     .contact-category {
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
+        padding: 1rem;
     }
     
     .contact-category h4 {
@@ -1821,15 +1840,20 @@ body {
     
     .contact-item {
         padding: 1rem;
-        font-size: 0.9rem;
-        flex-direction: column;
-        text-align: center;
+        font-size: 0.85rem;
+        white-space: normal;
+        word-break: break-word;
+        display: flex;
+        align-items: center;
         gap: 0.5rem;
+        text-align: left;
+        line-height: 1.3;
     }
     
     .contact-item i {
         font-size: 1.5rem;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0;
+        min-width: 20px;
     }
     
     .social-icons {
@@ -1850,8 +1874,8 @@ body {
     .contact-horizontal {
         flex-direction: column;
         align-items: center;
-        padding: 1.5rem;
-        gap: 1.5rem;
+        padding: 1rem;
+        gap: 1rem;
     }
     
     .contact-horizontal-item {
@@ -1946,7 +1970,7 @@ body {
     }
     
     .hero-stats {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
         gap: 0.5rem;
         margin-bottom: 1.5rem;
     }
@@ -2127,8 +2151,8 @@ body {
     }
     
     .contact-horizontal {
-        padding: 1rem;
-        gap: 1rem;
+        padding: 0.8rem;
+        gap: 0.8rem;
     }
     
     .contact-horizontal-item i {
