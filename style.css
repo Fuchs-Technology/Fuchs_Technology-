@@ -141,7 +141,7 @@ body {
 .hero {
     background: linear-gradient(135deg, rgba(26, 54, 93, 0.95) 0%, rgba(37, 99, 235, 0.9) 100%), url('images/hero-bg.jpg');
     background-size: cover;
-    background-position: center;
+    background-position: center center;
     background-attachment: fixed;
     color: var(--blanc);
     padding: 120px 0 80px;
@@ -1358,6 +1358,10 @@ body {
         overflow-y: auto;
     }
     
+    .hero {
+        background-attachment: scroll !important;
+    }
+    
     .nav-links.active {
         right: 0;
     }
@@ -1939,6 +1943,10 @@ body {
     
     .nav {
         padding: 0.75rem 10px;
+    }
+    
+    .hero {
+        background-attachment: scroll !important;
     }
     
     .logo h2 {
